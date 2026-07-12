@@ -44,7 +44,7 @@ export default function RSVP() {
 
         <div className="relative w-full max-w-xs mx-auto mb-10">
           <motion.div
-            className="absolute inset-0 bg-brand-gold rounded-md transform-gpu will-change-transform"
+            className="absolute inset-0 bg-brand-gold rounded-full transform-gpu will-change-transform"
             animate={{ scale: [1, 1.1, 1], opacity: [0, 0.4, 0] }}
             transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
           />
