@@ -50,7 +50,7 @@ export default function BackgroundEffects() {
       {particles.map((p) => (
         <motion.div
           key={p.id}
-          className="absolute rounded-full bg-brand-gold opacity-40 mix-blend-screen shadow-[0_0_8px_rgba(201,168,106,0.8)]"
+          className="absolute rounded-full bg-brand-gold opacity-40 shadow-[0_0_8px_rgba(201,168,106,0.8)] transform-gpu will-change-transform"
           style={{ width: p.size, height: p.size, left: `${p.x}%`, top: `${p.y}%` }}
           animate={{ y: ["0vh", "-100vh"], x: ["0vw", `${p.xEnd}vw`], opacity: [0, 0.8, 0] }}
           transition={{ duration: p.duration, repeat: Infinity, delay: p.delay, ease: "linear" }}

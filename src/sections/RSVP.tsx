@@ -42,15 +42,16 @@ export default function RSVP() {
       >
         <h2 className="font-playfair text-3xl md:text-4xl text-brand-gold mb-8 italic">We would love for you to join us</h2>
 
-        <motion.div
-          animate={{ boxShadow: ["0px 0px 0px 0px rgba(201,168,106,0.4)", "0px 0px 20px 10px rgba(201,168,106,0)", "0px 0px 0px 0px rgba(201,168,106,0)"] }}
-          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-          className="rounded-md w-full max-w-xs mx-auto mb-10"
-        >
-          <Button onClick={() => setIsOpen(true)} className="bg-brand-gold text-[#1a1a1a] border-brand-gold hover:bg-brand-bg hover:text-brand-text w-full">
+        <div className="relative w-full max-w-xs mx-auto mb-10">
+          <motion.div
+            className="absolute inset-0 bg-brand-gold rounded-md transform-gpu will-change-transform"
+            animate={{ scale: [1, 1.1, 1], opacity: [0, 0.4, 0] }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+          />
+          <Button onClick={() => setIsOpen(true)} className="relative bg-brand-gold text-[#1a1a1a] border-brand-gold hover:bg-brand-bg hover:text-brand-text w-full transform-gpu">
             RSVP Now
           </Button>
-        </motion.div>
+        </div>
 
         <div className="flex flex-col items-center mt-12 border-t border-brand-gold/20 pt-8">
           <span className="font-inter text-[10px] tracking-widest uppercase text-brand-gold/60 mb-4">Contact Information</span>

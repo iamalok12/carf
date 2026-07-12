@@ -29,10 +29,10 @@ export default function EnvelopeOpening({ onOpen }: EnvelopeOpeningProps) {
     <AnimatePresence>
       {!isRemoving && (
           <motion.div
-            className="fixed inset-0 z-50 flex items-center justify-center bg-[#1a1a1a]"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-[#1a1a1a] transform-gpu will-change-transform"
             initial={{ opacity: 1 }}
-            exit={{ opacity: 0, scale: 30, filter: "brightness(3) blur(20px)" }}
-            transition={{ duration: 1.8, ease: [0.8, 0, 0.2, 1] }}
+            exit={{ opacity: 0, scale: 20 }}
+            transition={{ duration: 1.5, ease: [0.8, 0, 0.2, 1] }}
             onClick={handleOpen}
           >
             {/* Blinding Light Flash on exit */}

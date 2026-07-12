@@ -32,63 +32,36 @@ export default function Hero() {
     <section className="relative h-[90vh] md:h-full min-h-[600px] flex flex-col items-center justify-center overflow-hidden">
       {/* Cinematic Parallax Background with Slow Zoom */}
       <motion.div
-        className="absolute inset-0 z-0 bg-[url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80&w=1000')] bg-cover bg-center"
+        className="absolute inset-0 z-0 bg-[url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80&w=1000')] bg-cover bg-center transform-gpu will-change-transform"
         style={{ y, opacity: 0.15 }}
         animate={{ scale: [1, 1.1, 1] }}
         transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
       />
-
-      {/* Floating Bokeh Orbs */}
-      <motion.div 
-        className="absolute inset-0 z-0 pointer-events-none"
-        style={{ y: useTransform(scrollY, [0, 500], [0, 50]) }}
-      >
-        {[
-          { size: 250, left: 20, top: 15, delay: 0, duration: 15 },
-          { size: 180, left: 70, top: 40, delay: 2, duration: 12 },
-          { size: 300, left: 40, top: 80, delay: 1, duration: 18 },
-          { size: 220, left: 85, top: 10, delay: 4, duration: 14 },
-          { size: 150, left: 10, top: 60, delay: 3, duration: 10 },
-        ].map((orb, i) => (
-          <motion.div
-            key={i}
-            className="absolute rounded-full bg-brand-gold/20 blur-3xl mix-blend-screen"
-            style={{
-              width: orb.size,
-              height: orb.size,
-              left: `${orb.left}%`,
-              top: `${orb.top}%`,
-            }}
-            animate={{
-              y: [0, -50, 0],
-              x: [0, 30, 0],
-              scale: [1, 1.2, 1],
-              opacity: [0.3, 0.6, 0.3],
-            }}
-            transition={{
-              duration: orb.duration,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: orb.delay,
-            }}
-          />
-        ))}
-      </motion.div>
 
       {/* Golden Frame */}
       <div className="absolute inset-4 md:inset-8 border border-brand-gold/30 rounded-2xl md:rounded-3xl pointer-events-none z-10" />
       <div className="absolute inset-5 md:inset-10 border border-brand-gold/10 rounded-xl md:rounded-2xl pointer-events-none z-10" />
 
       {/* Content */}
-      <motion.div
-        className="relative z-20 flex flex-col items-center text-center px-6"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        variants={letterAnimation}
-        style={{ opacity }}
-      >
-        <motion.p variants={itemAnimation} className="font-inter text-xs md:text-sm tracking-[0.3em] uppercase text-brand-gold mb-6">
+      <div className="relative z-20 flex flex-col items-center justify-center text-center mt-20">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.5 }}
+          className="mb-8"
+        >
+          <span className="font-inter text-xs md:text-sm tracking-[0.3em] uppercase text-brand-gold mb-2 block">
+            Join us for
+          </span>
+          <span className="w-12 h-[1px] bg-brand-gold/50 mx-auto block mb-4" />
+        </motion.div>
+
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 1 }}
+          className="font-cormorant text-lg md:text-xl text-brand-text/80 mb-12 tracking-widest uppercase"
+        >
           The Wedding Celebration of
         </motion.p>
 
@@ -99,10 +72,10 @@ export default function Hero() {
               {partner1.firstName.split("").map((char, index) => (
                 <motion.span
                   key={index}
-                  initial={{ opacity: 0, y: 100, rotateX: -90, rotateY: 45, scale: 0.5 }}
-                  animate={{ opacity: 1, y: 0, rotateX: 0, rotateY: 0, scale: 1 }}
-                  transition={{ duration: 1.5, delay: 0.5 + index * 0.1, type: "spring", bounce: 0.5 }}
-                  className="inline-block drop-shadow-md"
+                  initial={{ opacity: 0, y: 50, rotateX: -90, scale: 0.8 }}
+                  animate={{ opacity: 1, y: 0, rotateX: 0, scale: 1 }}
+                  transition={{ duration: 1, delay: 0.5 + index * 0.05, type: "spring", bounce: 0.4 }}
+                  className="inline-block transform-gpu will-change-transform drop-shadow-sm"
                 >
                   {char === " " ? "\u00A0" : char}
                 </motion.span>
@@ -110,10 +83,10 @@ export default function Hero() {
             </h1>
             {partner1.parents && (
               <motion.p 
-                initial={{ opacity: 0, filter: "blur(10px)" }}
-                animate={{ opacity: 1, filter: "blur(0px)" }}
-                transition={{ duration: 2, delay: 2 }}
-                className="font-cormorant text-sm text-brand-text/70 italic max-w-xs"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1, delay: 1.5 }}
+                className="font-cormorant text-sm text-brand-text/70 italic max-w-xs transform-gpu will-change-transform"
               >
                 {partner1.parents}
               </motion.p>
@@ -123,15 +96,15 @@ export default function Hero() {
           {/* Ampersand */}
           <motion.div 
             className="perspective-[1000px] z-20"
-            initial={{ scale: 0, rotate: -180 }}
-            animate={{ scale: 1, rotate: 0 }}
-            transition={{ duration: 1.5, delay: 1.5, type: "spring" }}
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ duration: 1, delay: 1, type: "spring" }}
           >
             <motion.span 
-              className="font-vibes text-4xl text-brand-gold py-6 drop-shadow-[0_0_15px_rgba(201,168,106,0.8)] inline-block"
-              animate={{ rotateY: [0, 360], filter: ["hue-rotate(0deg)", "hue-rotate(30deg)", "hue-rotate(0deg)"] }}
-              transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-              whileHover={{ scale: 1.3, rotateZ: 10 }}
+              className="font-vibes text-4xl text-brand-gold py-6 inline-block transform-gpu will-change-transform"
+              animate={{ rotateY: [0, 360] }}
+              transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+              whileHover={{ scale: 1.1 }}
             >
               &
             </motion.span>
@@ -143,10 +116,10 @@ export default function Hero() {
               {partner2.firstName.split("").map((char, index) => (
                 <motion.span
                   key={index}
-                  initial={{ opacity: 0, y: 100, rotateX: 90, rotateY: -45, scale: 0.5 }}
-                  animate={{ opacity: 1, y: 0, rotateX: 0, rotateY: 0, scale: 1 }}
-                  transition={{ duration: 1.5, delay: 1.5 + index * 0.1, type: "spring", bounce: 0.5 }}
-                  className="inline-block drop-shadow-md"
+                  initial={{ opacity: 0, y: 50, rotateX: 90, scale: 0.8 }}
+                  animate={{ opacity: 1, y: 0, rotateX: 0, scale: 1 }}
+                  transition={{ duration: 1, delay: 1 + index * 0.05, type: "spring", bounce: 0.4 }}
+                  className="inline-block transform-gpu will-change-transform drop-shadow-sm"
                 >
                   {char === " " ? "\u00A0" : char}
                 </motion.span>
@@ -154,10 +127,10 @@ export default function Hero() {
             </h1>
             {partner2.parents && (
               <motion.p 
-                initial={{ opacity: 0, filter: "blur(10px)" }}
-                animate={{ opacity: 1, filter: "blur(0px)" }}
-                transition={{ duration: 2, delay: 3 }}
-                className="font-cormorant text-sm text-brand-text/70 italic max-w-xs"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1, delay: 2 }}
+                className="font-cormorant text-sm text-brand-text/70 italic max-w-xs transform-gpu will-change-transform"
               >
                 {partner2.parents}
               </motion.p>
@@ -172,7 +145,7 @@ export default function Hero() {
         <motion.p variants={itemAnimation} className="mt-2 font-inter text-xs tracking-[0.2em] uppercase text-brand-gold/80">
           {invitationData.weddingLocation}
         </motion.p>
-      </motion.div>
+      </div>
 
       {/* Scroll Indicator */}
       <motion.div
