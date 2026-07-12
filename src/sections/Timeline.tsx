@@ -1,0 +1,81 @@
+"use client";
+
+import { motion } from "framer-motion";
+import { invitationData } from "@/data/invitation";
+
+export default function Timeline() {
+  return (
+    <section className="py-24 px-6 bg-brand-bg relative z-10">
+      <div className="max-w-5xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          className="text-center mb-16"
+        >
+          <h2 className="font-vibes text-4xl text-brand-burgundy mb-2">Schedule</h2>
+          <p className="font-inter text-xs tracking-[0.2em] uppercase text-brand-gold">Order of Events</p>
+        </motion.div>
+
+        <div className="relative">
+          {/* Vertical Line Background */}
+          <div className="absolute left-6 top-0 bottom-0 w-[2px] bg-brand-gold/10" />
+          
+          {/* Vertical Line Animated Progress */}
+          <motion.div 
+            className="absolute left-6 top-0 w-[2px] bg-gradient-to-b from-brand-gold via-brand-gold to-transparent origin-top"
+            initial={{ scaleY: 0 }}
+            whileInView={{ scaleY: 1 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 2, ease: [0.16, 1, 0.3, 1] }}
+            style={{ height: "100%" }}
+          />
+
+          {invitationData.timeline.map((event, index) => {
+            return (
+              <motion.div
+                key={event.id}
+                initial={{ opacity: 0, y: 50, rotateX: 30, scale: 0.95 }}
+                whileInView={{ opacity: 1, y: 0, rotateX: 0, scale: 1 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.8, delay: 0.1, type: "spring", bounce: 0.4 }}
+                className="relative flex items-center mb-16 last:mb-0 flex-row perspective-[1000px]"
+              >
+                {/* Timeline Node with Pulse */}
+                <div className="absolute left-6 flex items-center justify-center -translate-x-[7px] z-10">
+                  <motion.div 
+                    className="absolute w-8 h-8 rounded-full bg-brand-gold/20"
+                    animate={{ scale: [1, 1.5, 1], opacity: [0.5, 0, 0.5] }}
+                    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut", delay: index * 0.2 }}
+                  />
+                  <div className="w-4 h-4 bg-brand-bg border-4 border-brand-gold rounded-full shadow-[0_0_15px_rgba(201,168,106,0.8)] relative z-10" />
+                </div>
+
+                {/* Card Container */}
+                <div className="pl-16 w-full flex justify-start">
+                  <motion.div 
+                    className="w-full max-w-sm p-8 rounded-2xl bg-white/50 backdrop-blur-md border border-brand-gold/20 shadow-[0_10px_40px_rgb(0,0,0,0.05)] hover:shadow-[0_20px_60px_rgb(201,168,106,0.15)] flex flex-col relative overflow-hidden items-start text-left"
+                    whileHover={{ y: -5, scale: 1.02 }}
+                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                  >
+                    {/* Subtle glassmorphism highlight */}
+                    <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-white/40 to-transparent pointer-events-none" />
+                    
+                    <span className="font-inter text-[10px] tracking-widest uppercase text-brand-gold/90 block mb-3 relative z-10">
+                      {event.date} <span className="mx-2 opacity-50">•</span> {event.time}
+                    </span>
+                    <h3 className="font-playfair text-2xl text-brand-text mb-2 relative z-10">{event.title}</h3>
+                    <p className="font-cormorant text-base text-brand-text/80 mb-3 font-medium relative z-10">{event.location}</p>
+                    {event.description && (
+                      <p className="font-cormorant text-sm text-brand-text/60 italic leading-relaxed relative z-10">{event.description}</p>
+                    )}
+                  </motion.div>
+                </div>
+              </motion.div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
