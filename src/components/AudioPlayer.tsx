@@ -9,10 +9,19 @@ export default function AudioPlayer() {
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
-    // We create the audio instance here so it's only on client-side
-    audioRef.current = new Audio("https://cdn.pixabay.com/download/audio/2022/10/25/audio_2756df60ee.mp3?filename=romantic-piano-1234.mp3");
+    // ─── HOW TO ADD YOUR MUSIC ──────────────────────────────────────────────────
+    // 1. Place your MP3 file inside the /public folder
+    //    e.g. carf-main/public/wedding-song.mp3
+    // 2. Update the filename below to match your file name
+    // ────────────────────────────────────────────────────────────────────────────
+    const MUSIC_FILE = "/wedding-song.mp3";
+
+    audioRef.current = new Audio(MUSIC_FILE);
     audioRef.current.loop = true;
     audioRef.current.volume = 0.5;
+    audioRef.current.onerror = () => {
+      // Silently ignore — music file not yet added to /public
+    };
 
     return () => {
       if (audioRef.current) {
@@ -27,10 +36,14 @@ export default function AudioPlayer() {
 
     if (isPlaying) {
       audioRef.current.pause();
+      setIsPlaying(false);
     } else {
-      audioRef.current.play().catch(e => console.error("Audio playback failed", e));
+      audioRef.current.play().then(() => {
+        setIsPlaying(true);
+      }).catch(() => {
+        // Music file not found — add wedding-song.mp3 to /public to enable music
+      });
     }
-    setIsPlaying(!isPlaying);
   };
 
   return (

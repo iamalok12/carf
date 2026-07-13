@@ -28,31 +28,31 @@ export default function EnvelopeOpening({ onOpen }: EnvelopeOpeningProps) {
   return (
     <AnimatePresence>
       {!isRemoving && (
+        <motion.div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-[#1a1a1a]"
+          initial={{ opacity: 1 }}
+          exit={{ opacity: 0, scale: 20 }}
+          transition={{ duration: 1.5, ease: [0.8, 0, 0.2, 1] }}
+          onClick={handleOpen}
+        >
+          {/* Blinding Light Flash on exit */}
           <motion.div
-            className="fixed inset-0 z-50 flex items-center justify-center bg-[#1a1a1a]"
-            initial={{ opacity: 1 }}
-            exit={{ opacity: 0, scale: 20 }}
-            transition={{ duration: 1.5, ease: [0.8, 0, 0.2, 1] }}
-            onClick={handleOpen}
-          >
-            {/* Blinding Light Flash on exit */}
-            <motion.div
-              className="absolute inset-0 bg-brand-gold z-50 pointer-events-none mix-blend-screen"
-              initial={{ opacity: 0 }}
-              animate={isRemoving ? { opacity: 1 } : { opacity: 0 }}
-              transition={{ duration: 1 }}
-            />
-            
-            {/* Subtle Ambient Lighting */}
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-brand-gold/15 via-transparent to-transparent pointer-events-none" />
+            className="absolute inset-0 bg-brand-gold z-50 pointer-events-none mix-blend-screen"
+            initial={{ opacity: 0 }}
+            animate={isRemoving ? { opacity: 1 } : { opacity: 0 }}
+            transition={{ duration: 1 }}
+          />
 
-            {/* Envelope Container */}
-            <motion.div
-              className="relative w-[320px] h-[480px] md:w-[400px] md:h-[600px] cursor-pointer perspective-[2000px] z-10"
-              style={{ transformStyle: "preserve-3d" }}
-              animate={isOpen ? { scale: 1.1, y: -20, rotateX: 5 } : { scale: 1, y: 0, rotateX: 0 }}
-              transition={{ duration: 1.5, ease: "easeInOut" }}
-            >
+          {/* Subtle Ambient Lighting */}
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-brand-gold/15 via-transparent to-transparent pointer-events-none" />
+
+          {/* Envelope Container */}
+          <motion.div
+            className="relative w-[320px] h-[480px] md:w-[400px] md:h-[600px] cursor-pointer perspective-[2000px] z-10"
+            style={{ transformStyle: "preserve-3d" }}
+            animate={isOpen ? { scale: 1.1, y: -20, rotateX: 5 } : { scale: 1, y: 0, rotateX: 0 }}
+            transition={{ duration: 1.5, ease: "easeInOut" }}
+          >
             {/* Back of Envelope */}
             <div className="absolute inset-0 bg-[#EFE3D0] rounded-lg shadow-2xl overflow-hidden border border-brand-gold/20" />
 
@@ -61,7 +61,7 @@ export default function EnvelopeOpening({ onOpen }: EnvelopeOpeningProps) {
             <FloralBorder className="right-0 w-16 md:w-20 text-[#E2D4BB] scale-x-[-1]" />
 
             {/* Inner Golden Glow (revealed when flap opens) */}
-            <motion.div 
+            <motion.div
               className="absolute inset-0 top-0 h-[40%] bg-gradient-to-b from-brand-gold/80 via-brand-gold/20 to-transparent blur-xl z-10"
               initial={{ opacity: 0 }}
               animate={isOpen ? { opacity: 1 } : { opacity: 0 }}

@@ -67,7 +67,7 @@ export default function Timeline() {
                     <h3 className="font-playfair text-2xl text-brand-text mb-2 relative z-10">{event.title}</h3>
                     <p className="font-cormorant text-base text-brand-text/80 mb-3 font-medium relative z-10">{event.location}</p>
                     {event.description && (
-                      <p className="font-cormorant text-sm text-brand-text/60 italic leading-relaxed relative z-10">{event.description}</p>
+                      <p className="font-cormorant text-sm text-brand-text/60 italic leading-relaxed relative z-10 whitespace-pre-line">{event.description}</p>
                     )}
                   </motion.div>
                 </div>

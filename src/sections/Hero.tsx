@@ -2,12 +2,10 @@
 
 import { motion, useScroll, useTransform } from "framer-motion";
 import { invitationData } from "@/data/invitation";
-import { ChevronDown } from "lucide-react";
 
 export default function Hero() {
   const { scrollY } = useScroll();
   const y = useTransform(scrollY, [0, 500], [0, 150]);
-  const opacity = useTransform(scrollY, [0, 300], [1, 0]);
 
   const { partner1, partner2 } = invitationData.couple;
 
@@ -29,7 +27,7 @@ export default function Hero() {
   };
 
   return (
-    <section className="relative h-[90vh] md:h-full min-h-[600px] flex flex-col items-center justify-center overflow-hidden">
+    <section className="relative min-h-[600px] flex flex-col items-center justify-center overflow-hidden py-16">
       {/* Cinematic Parallax Background with Slow Zoom */}
       <motion.div
         className="absolute inset-0 z-0 bg-[url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80&w=1000')] bg-cover bg-center transform-gpu will-change-transform"
@@ -43,7 +41,24 @@ export default function Hero() {
       <div className="absolute inset-5 md:inset-10 border border-brand-gold/10 rounded-xl md:rounded-2xl pointer-events-none z-10" />
 
       {/* Content */}
-      <div className="relative z-20 flex flex-col items-center justify-center text-center mt-20">
+      <div className="relative z-20 flex flex-col items-center justify-center text-center mt-8">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8, y: -20 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          transition={{ duration: 1.5, ease: "easeOut", delay: 0.2 }}
+          className="mb-8"
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/logo.png"
+            alt="Couple Monogram Logo"
+            width={160}
+            height={160}
+            style={{ mixBlendMode: "multiply" }}
+            className="w-32 h-32 md:w-40 md:h-40 object-contain opacity-90"
+          />
+        </motion.div>
+
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -82,11 +97,11 @@ export default function Hero() {
               ))}
             </h1>
             {partner1.parents && (
-              <motion.p 
+              <motion.p
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, delay: 1.5 }}
-                className="font-cormorant text-sm text-brand-text/70 italic max-w-xs transform-gpu will-change-transform"
+                className="font-cormorant text-sm text-brand-text/70 italic max-w-sm transform-gpu will-change-transform whitespace-pre-line"
               >
                 {partner1.parents}
               </motion.p>
@@ -94,14 +109,14 @@ export default function Hero() {
           </div>
 
           {/* Ampersand */}
-          <motion.div 
+          <motion.div
             className="perspective-[1000px] z-20"
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             transition={{ duration: 1, delay: 1, type: "spring" }}
           >
-            <motion.span 
-              className="font-vibes text-4xl text-brand-gold py-6 inline-block transform-gpu will-change-transform"
+            <motion.span
+              className="font-vibes text-6xl font-bold text-brand-gold py-6 inline-block transform-gpu will-change-transform"
               animate={{ rotateY: [0, 360] }}
               transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
               whileHover={{ scale: 1.1 }}
@@ -109,7 +124,7 @@ export default function Hero() {
               &
             </motion.span>
           </motion.div>
-          
+
           {/* Groom */}
           <div className="flex flex-col items-center text-center w-full perspective-[1500px]">
             <h1 className="font-playfair text-5xl leading-none text-brand-text font-medium italic mb-3 tracking-wide break-words w-full flex flex-wrap justify-center">
@@ -126,11 +141,11 @@ export default function Hero() {
               ))}
             </h1>
             {partner2.parents && (
-              <motion.p 
+              <motion.p
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, delay: 2 }}
-                className="font-cormorant text-sm text-brand-text/70 italic max-w-xs transform-gpu will-change-transform"
+                className="font-cormorant text-sm text-brand-text/70 italic max-w-sm transform-gpu will-change-transform whitespace-pre-line"
               >
                 {partner2.parents}
               </motion.p>
@@ -142,27 +157,11 @@ export default function Hero() {
           {invitationData.weddingDateFormatted}
         </motion.p>
 
-        <motion.p variants={itemAnimation} className="mt-2 font-inter text-xs tracking-[0.2em] uppercase text-brand-gold/80">
+        <motion.p variants={itemAnimation} className="mt-2 mb-12 font-inter text-xs tracking-[0.2em] uppercase text-brand-gold/80">
           {invitationData.weddingLocation}
         </motion.p>
-      </div>
 
-      {/* Scroll Indicator */}
-      <motion.div
-        className="absolute bottom-10 z-20 flex flex-col items-center"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.5, duration: 1 }}
-        style={{ opacity }}
-      >
-        <span className="font-inter text-[10px] tracking-[0.2em] uppercase text-brand-text/50 mb-2">Scroll</span>
-        <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-        >
-          <ChevronDown size={16} className="text-brand-gold" />
-        </motion.div>
-      </motion.div>
+      </div>
     </section>
   );
 }

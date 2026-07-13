@@ -42,7 +42,23 @@ export default function Countdown() {
   ];
 
   return (
-    <section className="py-20 px-6 flex justify-center bg-brand-bg relative z-10 perspective-[1200px]">
+    <section className="py-20 px-6 flex flex-col items-center bg-brand-bg relative z-10 perspective-[1200px] gap-6">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+        className="text-center"
+      >
+        <p className="font-inter text-xs tracking-[0.3em] uppercase text-brand-gold mb-2">
+          Counting Down To
+        </p>
+        <h2 className="font-vibes text-4xl text-brand-text">
+          Our Wedding Day
+        </h2>
+        <span className="w-10 h-[1px] bg-brand-gold/50 mx-auto block mt-3" />
+      </motion.div>
+
       <motion.div
         className="glass-panel rounded-3xl p-8 w-full max-w-sm flex justify-between items-center shadow-[0_20px_40px_rgba(0,0,0,0.2)] relative overflow-hidden transform-gpu"
         initial={{ opacity: 0, y: 50, rotateX: -30, scale: 0.9 }}
