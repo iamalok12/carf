@@ -75,58 +75,60 @@ export default function Venue() {
                 </div>
               </motion.div>
 
+              {/* Chakraborty Family contact info after first venue card */}
+              {index === 0 && (
+                <motion.div
+                  key="chakraborty-contact"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8 }}
+                  className="text-center py-4 mt-8"
+                >
+                  <span className="w-10 h-[1px] bg-brand-gold/40 mx-auto block mb-6" />
+                  <p className="font-inter text-[10px] tracking-widest uppercase bg-brand-gold text-white px-4 py-1.5 inline-block mb-4 shadow-sm rounded-sm">With love from</p>
+                  <h3 className="font-playfair text-xl text-brand-text mb-4">{invitationData.contact?.family}</h3>
+                  <p className="font-cormorant text-sm text-brand-text/60 italic max-w-[240px] mx-auto leading-relaxed">
+                    {invitationData.contact?.address}
+                  </p>
+                  <div className="flex flex-col gap-1 mt-4">
+                    {invitationData.contact?.phones.map((phone, i) => (
+                      <a key={i} href={`tel:${phone.replace(/[^0-9+]/g, '')}`} className="font-inter text-sm text-brand-gold hover:opacity-70 transition-opacity">
+                        {phone}
+                      </a>
+                    ))}
+                  </div>
+                </motion.div>
+              )}
+
+              {/* Mukherjee Family contact info after second venue card */}
+              {index === 1 && (
+                <motion.div
+                  key="mukherjee-contact"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8 }}
+                  className="text-center py-4 mt-8"
+                >
+                  <span className="w-10 h-[1px] bg-brand-gold/40 mx-auto block mb-6" />
+                  <p className="font-inter text-[10px] tracking-widest uppercase bg-brand-gold text-white px-4 py-1.5 inline-block mb-4 shadow-sm rounded-sm">With love from</p>
+                  <h3 className="font-playfair text-xl text-brand-text mb-4">Mukherjee Family</h3>
+                  <p className="font-cormorant text-sm text-brand-text/60 italic max-w-[240px] mx-auto leading-relaxed">
+                    A126, Nature City, Uslapur, Bilaspur Chhattisgarh 495001
+                  </p>
+                  <div className="flex flex-col gap-1 mt-4">
+                    {["+91 74404 47767", "+91 99934 77371"].map((phone, i) => (
+                      <a key={i} href={`tel:${phone.replace(/[^0-9+]/g, '')}`} className="font-inter text-sm text-brand-gold hover:opacity-70 transition-opacity">
+                        {phone}
+                      </a>
+                    ))}
+                  </div>
+                </motion.div>
+              )}
+
             </React.Fragment>
           ))}
-        </div>
-
-        {/* Contact Info Section */}
-        <div className="mt-24 flex flex-col items-center">
-          <span className="w-10 h-[1px] bg-brand-gold/40 mx-auto block mb-6" />
-          <p className="font-inter text-[10px] tracking-widest uppercase bg-brand-gold text-white px-4 py-1.5 inline-block mb-10 shadow-sm rounded-sm">With love from</p>
-          
-          <div className="flex flex-col md:flex-row justify-center items-start gap-12 md:gap-32 w-full max-w-4xl">
-            {/* Chakraborty Family */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-              className="text-center flex-1 w-full"
-            >
-              <h3 className="font-playfair text-xl text-brand-text mb-4">{invitationData.contact?.family}</h3>
-              <p className="font-cormorant text-sm text-brand-text/60 italic max-w-[240px] mx-auto leading-relaxed">
-                {invitationData.contact?.address}
-              </p>
-              <div className="flex flex-col gap-1 mt-4">
-                {invitationData.contact?.phones.map((phone, i) => (
-                  <a key={i} href={`tel:${phone.replace(/[^0-9+]/g, '')}`} className="font-inter text-sm text-brand-gold hover:opacity-70 transition-opacity">
-                    {phone}
-                  </a>
-                ))}
-              </div>
-            </motion.div>
-
-            {/* Mukherjee Family */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-center flex-1 w-full"
-            >
-              <h3 className="font-playfair text-xl text-brand-text mb-4">Mukherjee Family</h3>
-              <p className="font-cormorant text-sm text-brand-text/60 italic max-w-[240px] mx-auto leading-relaxed">
-                A126, Nature City, Uslapur, Bilaspur Chhattisgarh 495001
-              </p>
-              <div className="flex flex-col gap-1 mt-4">
-                {["+91 74404 47767", "+91 99934 77371"].map((phone, i) => (
-                  <a key={i} href={`tel:${phone.replace(/[^0-9+]/g, '')}`} className="font-inter text-sm text-brand-gold hover:opacity-70 transition-opacity">
-                    {phone}
-                  </a>
-                ))}
-              </div>
-            </motion.div>
-          </div>
         </div>
       </div>
     </section>
