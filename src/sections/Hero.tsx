@@ -9,18 +9,6 @@ export default function Hero() {
 
   const { partner1, partner2 } = invitationData.couple;
 
-  const letterAnimation = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        staggerChildren: 0.05,
-        delayChildren: 0.2,
-      },
-    },
-  };
-
   const itemAnimation = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] as const } },
@@ -46,16 +34,14 @@ export default function Hero() {
           initial={{ opacity: 0, scale: 0.8, y: -20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ duration: 1.5, ease: "easeOut", delay: 0.2 }}
-          className="mb-8"
+          className="mb-8 flex items-center justify-center"
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/logo.png"
+            src="/logo.webp"
             alt="Couple Monogram Logo"
-            width={160}
-            height={160}
-            style={{ mixBlendMode: "multiply" }}
-            className="w-32 h-32 md:w-40 md:h-40 object-contain opacity-90"
+            className="w-40 h-40 md:w-52 md:h-52 object-contain"
+            style={{ mixBlendMode: "screen" }}
           />
         </motion.div>
 

@@ -38,11 +38,17 @@ export default function AudioPlayer() {
       audioRef.current.pause();
       setIsPlaying(false);
     } else {
-      audioRef.current.play().then(() => {
-        setIsPlaying(true);
-      }).catch(() => {
-        // Music file not found — add wedding-song.mp3 to /public to enable music
-      });
+      const playPromise = audioRef.current.play();
+      if (playPromise !== undefined) {
+        playPromise
+          .then(() => {
+            setIsPlaying(true);
+          })
+          .catch(() => {
+            // Music file not found or autoplay blocked — add wedding-song.mp3 to /public
+            setIsPlaying(false);
+          });
+      }
     }
   };
 

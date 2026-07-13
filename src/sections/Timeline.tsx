@@ -67,7 +67,17 @@ export default function Timeline() {
                     <h3 className="font-playfair text-2xl text-brand-text mb-2 relative z-10">{event.title}</h3>
                     <p className="font-cormorant text-base text-brand-text/80 mb-3 font-medium relative z-10">{event.location}</p>
                     {event.description && (
-                      <p className="font-cormorant text-sm text-brand-text/60 italic leading-relaxed relative z-10 whitespace-pre-line">{event.description}</p>
+                      <div className="font-cormorant text-sm italic leading-relaxed relative z-10 space-y-1">
+                        {event.description.split("\n").map((line, i) =>
+                          line.startsWith("Dress Code") ? (
+                            <p key={i} className="font-semibold not-italic text-yellow-600 text-sm tracking-wide">
+                              🌼 {line}
+                            </p>
+                          ) : (
+                            <p key={i} className="text-brand-text/60">{line}</p>
+                          )
+                        )}
+                      </div>
                     )}
                   </motion.div>
                 </div>

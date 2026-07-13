@@ -42,7 +42,7 @@ export const invitationData: InvitationData = {
     {
       id: "haldi",
       title: "Haldi Ceremony",
-      time: "Afternoon",
+      time: "12:00 PM",
       date: "26 November 2026",
       location: "Smart Connect",
       address: "Kolkata",
