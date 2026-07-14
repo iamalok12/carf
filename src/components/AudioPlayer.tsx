@@ -23,6 +23,16 @@ export default function AudioPlayer() {
       // Silently ignore — music file not yet added to /public
     };
 
+    if (isPlaying) {
+      const playPromise = audioRef.current.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {
+          // Autoplay was blocked or file missing
+          setIsPlaying(false);
+        });
+      }
+    }
+
     return () => {
       if (audioRef.current) {
         audioRef.current.pause();
