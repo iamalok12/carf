@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { Music, VolumeX } from "lucide-react";
 
 export default function AudioPlayer() {
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(true);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
